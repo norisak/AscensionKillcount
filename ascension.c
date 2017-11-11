@@ -10,7 +10,7 @@
 
 
 int min(int *array, size_t size){
-	int m=array[0];
+	int m = array[0];
 
 	for (int i = 1; i < size; ++i){
 		if (array[i] < m){
@@ -39,7 +39,7 @@ int rand_signet(){
 
 void print_array(int* array, size_t size){
 	for(int i = 0; i < size; ++i){
-		printf("%d ",array[i]);
+		printf("%d ", array[i]);
 	}
 	printf("\n");
 }
@@ -66,14 +66,14 @@ void get_ascension_crossbow(int *kc, int *signet_counts){
 
 			// Kill a Legio and see if we get a signet
 			if (roll_signet()){
-				signet_counts[signet_index]+= 1;
+				signet_counts[signet_index] += 1;
 				
 				// Check if we have enough signets to make a crossbow
 				if (min(signet_counts, NUM_SIGNETS) >= required_signets){
 					#ifdef DEBUG
-						printf("Done at %d as we got a keystone_index = %d\n",*kc, signet_index);
+						printf("Done at %d as we got a keystone_index = %d\n", *kc, signet_index);
 						printf("Signet counts: ");
-						print_array(signet_counts,NUM_SIGNETS);
+						print_array(signet_counts, NUM_SIGNETS);
 					#endif
 					return;
 				}
@@ -88,14 +88,11 @@ int main(){
 	int *signet_counts = calloc(NUM_SIGNETS, sizeof(int));
 	int *kc = calloc(1, sizeof(int));
 
-	long long total_kc;
-
 	for (int i = 0; i < NUM_ATTEMPTS; ++i){
 		// Simulate killing ascension creatures until we get the desired amount of crossbows
 		for (int j = 0; j < NUM_CROSSBOWS; ++j){
 			get_ascension_crossbow(kc, signet_counts);
 		}
-		total_kc += *kc;
 		// Print the kc
 		printf("%d\n",*kc);
 		// Reset the kc and amount of signets for the next attempt.
