@@ -22,8 +22,8 @@ int min(int *array, size_t size){
 
 
 int roll_keystone(){
-	// Assumes that rand() returns 15 random bits
-	return (rand() >> 9) == 0;  // Has a 1/64 chance of returning 1
+	// Gets the more significant bits from rand() as they are "more random".
+	return ((rand() >> 9) & 0b111111) == 0;;  // Has a 1/64 chance of returning 1
 }
 
 
