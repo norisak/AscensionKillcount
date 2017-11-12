@@ -9,12 +9,24 @@ def get_num_lt_or_eq(l, num):
     :param num: Upper bound
     :return: The number of elements in l that are less than or equal to num.
     """
-    x = 0
-    for kc in l:
-        if kc <= num:
-            x += 1
-    return x
+    # binary search for the position of num
+    left = 0
+    right = len(l) - 1
 
+    num += 1
+
+    while right >= left:
+        pos = (left + right) // 2
+        if l[pos] < num:
+            left = pos + 1
+            continue
+        if l[pos] >= num:
+            right = pos - 1
+            continue
+        return pos
+        break
+    
+    return left
 
 def get_percentile(l, p):
     """
@@ -41,7 +53,7 @@ def main():
 
     average = sum(kc_history) // len(kc_history)
 
-    for x in range(250):
+    for x in range(kc_history[len(kc_history)-1]//1000+2):
         x = x * 1000
         print("{}\t{}".format(x, get_num_lt_or_eq(kc_history, x)))
     
